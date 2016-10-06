@@ -39,11 +39,12 @@ The website will include a simple login system, and each user can gain “Accomp
 12. Integration of 3rd party geocaching data
 13. Accomplishment System
 14. Tracks top users stats
-15. Awards badges / achievements
+15. Accomplishment badges on profiles
 16. Profiles
 17. User profiles with information about them
 18. Stats
-19. Accomplishments done
+19. Search bar to search for geo caches. 
+
     
                     
 # 5. Business Rules
@@ -61,12 +62,16 @@ The website will include a simple login system, and each user can gain “Accomp
 
 
 
-# 6. Technologies Used
+# 6. Technologies Used:
     * HTML/CSS
     * JS
     * PHP
     * MySQL
     * Laravel
+    
+## Data Sources:
+    * Google Maps API
+    * Open Geo Cache API
 
 
 # 7. Timeline
@@ -107,4 +112,107 @@ Laravel provides functionality for abstracting database query results into PHP o
 We would be using the memento pattern to be a sort of checkpoint in saving the state of in progress form data that is being entered on the creation of new events or geocaches. In the event that someone accidentally leaves the page prematurely, their information will be retained. 
     
         
+# Layering
+
+## Presentation Layer
+    For the basis of our presentation layer, our views are arranged in more of a hierarchy and do not specifically refer to a class, rather they are more similar to a template.   
+### Admin View (/admin)
+* While an administrator is also a user, the user that is marked as an admin has a specific panel area they are able to access and use for specific additional functions. 
+* Modify Event View (/admin/event)
+. . * The administrator is able to load a page to add, delete, or modify events inside of the administrator panel.
+* Modify Accomplishment View (/admin/acc)
+* *  The administrator is able to load a page to add, delete or modify accomplishments inside the administrator panel.
+### Club Member (Profile) View (/profile)
+* Add Cache View (/addcache)
+. . * The GeoChap user is able to register a new geocache with the site, providing all location and cache data through a form for submission.
+. .* Check In View (/checkin)
+. .* The GeoChap user is able to check in at specific caches to show that they have been there. They may leave a comment on that cache’s logbook.
+* Edit Profile View
+. .* The GeoChap user is able to edit his/her profile information anytime.
+### Public (Domain) View (/)
+* Detailed Cache View (/cache/<id> )
+. .* Public is able to see detailed cache data.
+
+### Presentation layer code for the code of displaying the user login
+
+
+
+```<!-- app/views/login.blade.php -->
+
+<!doctype html>
+<html>
+<head>
+<title>Login</title>
+</head>
+<body><
+
+{{ Form::open(array('url' => 'login')) }}
+<h1>Login</h1>
+
+<!-- if there are login errors, show them here -->
+<p>
+    {{ $errors->first('email') }}
+    {{ $errors->first('password') }}
+</p>
+
+<p>
+    {{ Form::label('email', 'Email Address') }}
+    {{ Form::text('email', Input::old('email'), array('placeholder' => 'alex@alexwacker.com')) }}
+</p>
+
+<p>
+    {{ Form::label('password', 'Password') }}
+    {{ Form::password('password') }}
+</p>
+
+<p>{{ Form::submit('Submit!') }}</p>
+{{ Form::close() }}```
+
+
+## Business Layer
+    
+### User Class
+
+The User class will represent users table in the database that are used to sign in and out of the application. It will also enforce the roles of requiring certain permissions to do some tasks. 
+
+### Cache Class
+
+The Cache class will represent the caches table in the database. It is the record of all the objects placed in the real world. It will enforce the business rules, such as a new cache having to be approved before it can be shown to all other users. 
+
+### Events Class
+
+The Events class will represent the events table in the database. It is a record of each time an administrator has created an event object. Also, it will be implemented to enforce the business rules by allowing only an administrator to create an event.
+
+### Check-Ins Class (includes comments)
+
+The Checkins class will represent the checkins table in the database. It is a record of each time a user has visited a cache object. It will also enforce the business rules, such as a user being able to checkin to a cache more than once.
+
+## Accomplishments Class
+
+The accomplishments class will represent the accomplishments table in the data that is a record of all the accomplishments that a user has fulfilled. It will enforce the business rules, such as only the first cache checkin being counted towards the completion of an accomplishment.
+
+Business Layer Check if user exists and then login if all correct:
+
+    $userdata = array(
+        'email'     => Input::get('email'),
+        'password'  => Input::get('password')
+    );
+
+  if (Auth::attempt($userdata)) {
+
+    //I’m in, Doc
+ } 
+
+
+Data Layer
+Laravel Eloquent ORM
+The data layer is mixed in with the service layer to a degree. Laravel provides something they call the “Eloquent ORM” that maps the class objects we create to records in the database. When new objects are created and their .save() methods are called, new records are created in the database. When a record is pulled from the database it is cast back to the specific object class we created.
+
+//how we would create a new user
+
+$user = new User();
+$user->email = “alex@alexwacker.com”;
+$user->is_admin=true;
+
+$user->save();
      
