@@ -119,19 +119,19 @@ We would be using the memento pattern to be a sort of checkpoint in saving the s
 ### Admin View (/admin)
 * While an administrator is also a user, the user that is marked as an admin has a specific panel area they are able to access and use for specific additional functions. 
 * Modify Event View (/admin/event)
-. . * The administrator is able to load a page to add, delete, or modify events inside of the administrator panel.
+ * The administrator is able to load a page to add, delete, or modify events inside of the administrator panel.
 * Modify Accomplishment View (/admin/acc)
-* *  The administrator is able to load a page to add, delete or modify accomplishments inside the administrator panel.
+ * The administrator is able to load a page to add, delete or modify accomplishments inside the administrator panel.
 ### Club Member (Profile) View (/profile)
 * Add Cache View (/addcache)
-. . * The GeoChap user is able to register a new geocache with the site, providing all location and cache data through a form for submission.
-. .* Check In View (/checkin)
-. .* The GeoChap user is able to check in at specific caches to show that they have been there. They may leave a comment on that cache’s logbook.
+ * The GeoChap user is able to register a new geocache with the site, providing all location and cache data through a form for submission.
+* Check In View (/checkin)
+ * The GeoChap user is able to check in at specific caches to show that they have been there. They may leave a comment on that cache’s logbook.
 * Edit Profile View
-. .* The GeoChap user is able to edit his/her profile information anytime.
+ * The GeoChap user is able to edit his/her profile information anytime.
 ### Public (Domain) View (/)
 * Detailed Cache View (/cache/<id> )
-. .* Public is able to see detailed cache data.
+ * Public is able to see detailed cache data.
 
 ### Presentation layer code for the code of displaying the user login
 
