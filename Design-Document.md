@@ -172,7 +172,16 @@ We would be using the memento pattern to be a sort of checkpoint in saving the s
 <p>{{ Form::submit('Submit!') }}</p>
 {{ Form::close() }}
 ```
+### Exceptions
 
+```html
+<div id='errorbox'></div>
+<form>
+ <!-- LOGIN FORM DETAILS HERE -->
+</form>
+```
+
+* Can be related to user login, though mostly handled in the business layer. 
 
 ## Business Layer
     
@@ -210,6 +219,32 @@ Business Layer Check if user exists and then login if all correct:
     //I’m in, Doc
  } 
 ```
+### Exceptions
+```php
+public function checkUser($a) {
+        If ($a == null){
+            throw new Exception(‘This’ . $a . ‘ does not exist.’);
+        } else {
+            return echo “User exists.”;
+        }
+    }
+```
+
+This function checks whether an user exists or not. If user exists, it continues onto user’s homepage (GeoCache). Otherwise, it throws an exception and prints an error saying that this user does not exist.
+
+* Validation - Check if user exists and then login if all correct (Access Authorization)
+  * Exception if login is invalid:
+  * Handles itself
+* Characters within comments must be no longer than 1000
+  * Handles itself
+* Validates whether a person is an admin to create events
+  * Handles itself
+* Validates check ins before leaving comments
+  * Handles itself
+* preg_match for PHP (password, username, email, comments)
+  * Handles itself
+
+
 
 ## Data Layer
 ### Laravel Eloquent ORM
@@ -225,3 +260,16 @@ $user->is_admin=true;
 
 $user->save();
 ``` 
+
+### Exceptions:
+* SQL exception
+  * Thrown to next layer above
+* Doesn’t exist
+  * Handle itself
+```php
+public function render($request, Exception $e) {
+    if ($e instanceof \App\Exceptions\DbUpdateException)
+        return ‘REPLACE THIS’; // Do something if this exception is thrown here.
+    return parent::render($request, $e);
+}
+```
