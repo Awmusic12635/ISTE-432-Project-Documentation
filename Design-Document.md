@@ -264,7 +264,7 @@ $user->save();
 ### Exceptions:
 * SQL exception
   * Thrown to next layer above
-* Doesn’t exist
+* Data Doesn’t exist
   * Handle itself
 ```php
 public function render($request, Exception $e) {
