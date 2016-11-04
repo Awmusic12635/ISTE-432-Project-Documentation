@@ -273,3 +273,9 @@ public function render($request, Exception $e) {
     return parent::render($request, $e);
 }
 ```
+
+## Performance
+
+
+
+## Refactoring
