@@ -278,7 +278,7 @@ public function render($request, Exception $e) {
 
 Much of the code we had written so far has left very little room for refactoring. We instead decided to focus more on improving the performance of the underlying infrastructure. 
 
-    We started by using PHP 5, as it is one of the most common versions of PHP and often the default used on most servers. We later discovered that the latest version, PHP 7, was able to offer dramatic performance improvements, often displaying load speed increases of up to 33%. With this in mind, we upgraded the default version on our system to PHP 7. 
+We started by using PHP 5, as it is one of the most common versions of PHP and often the default used on most servers. We later discovered that the latest version, PHP 7, was able to offer dramatic performance improvements, often displaying load speed increases of up to 33%. With this in mind, we upgraded the default version on our system to PHP 7. 
     
 Like most programs that utilize a database, our backend used MySQL. We decided to replace this with MariaDB, a drop-in replacement for MySQL that has a number of performance improvements built into it. We simply installed it on top of MySQL and MariaDB took care of the rest. We also increased the built-in database cache values since the application we are building is also very heavily focused on reads instead of writes. Increased caching will allow our application to perform better when handling repeated queries.
 
