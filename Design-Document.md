@@ -395,14 +395,14 @@ Finally, we decided to switch from a fully virtualized VM to a container. A VM i
 
 ## Testing
 
-We decided to use the testing framework PHPUnit.de to write the unit tests for our program. We tried to test the activites that could be the most prone for error and important parts of our application logic.
+We decided to use the testing framework PHPUnit (found at https://phpunit.de/) to write the unit tests for our program. We wrote tests for the activites that could be the most prone for error and important parts of our application logic.
 
 ### Login Test
 
-One of the most important tests that can be run in a multiuser system is that users are actually able to login. 
+One of the most important tests that can be run in a multiuser system is making sure that users are actually able to login. 
 
 #### Good Login
-In the test of a good login we make a new user, visit the login page and then enter that correct login information. We then assert that the user is redirected back to the main page to verify they are logged in. To make this easier we are not hashing the password for the test.
+Our process for testing a good login is to make a new user, visit the login page and then enter the correct login information. We then assert that the user is redirected back to the main page to verify they are logged in. To make this easier, we are not hashing the password for the test.
 
 ```php
 <?php
@@ -445,7 +445,7 @@ class LoginTest extends TestCase
 
 #### Bad Login
 
-Similar to the correct login test we set it up in the same mannor. However in this case we do not enter the correct login information and make the assertion that the user is not redirected to the main page and is instead back to the login page. It is just as important to test that a user can get in as it is to make sure those with the incorect information cannot login. 
+Similar to the correct login test we set it up in the same manner. However, in this case we do not enter the correct login information and make the assertion that the user is not redirected to the main page. They are instead taken back to the login page. It is just as important to test that a user can get in as it is to make sure those with the incorrect information cannot. 
 
 ```php
 <?php
@@ -487,11 +487,11 @@ class BadLoginTest extends TestCase
 
 ### New Cache Creation
 
-With our site being a geocaching website we need to get new geocaches from somewhere. In our case users can submit new geocaches once their account has been confirmed and enabled. 
+With our project being a geocaching website, we need to get new geocaches from somewhere. In our case, users can submit new geocaches once their account has been confirmed and enabled. 
 
 #### New Cache Authorized
 
-Similar to last time we will be testing both authorized and unauthorized users by filling out a web form as that specific user. 
+Similar to last time, we will be testing both authorized and unauthorized users by filling out a web form as that specific user. 
 
 ```php
 <?php
@@ -574,7 +574,7 @@ class NewCacheUnAuthTest extends TestCase
 
 ### Check In Test
 
-Another very large part of our user's interactio with our website is allowing them to checkin to various geocaches. In this test we create a user and then checkin as that user on the first geocache and make sure it goes through correctly.
+Another very large part of our user's interaction with our website is allowing them to check into various geocaches. In this test, we create a user and then check in as that user on the first geocache and make sure it processes correctly.
 
 ```php
 <?php
@@ -614,7 +614,7 @@ class CheckinTest extends TestCase
 
 ### Search Test
 
-Our users need to be able to find new geocaches in an easy manner. For this we use a search function. To test this we create a new geocache and then have the test run a search for that specific cache just as a user would and then checks to make sure it shows up. 
+Our users need to be able to easily find new geocaches. For this, we need a search function. To test it, we create a new geocache and then have the test run a search for that specific cache. It then checks to make sure the cache shows up. 
 
 ```php
 <?php
@@ -651,7 +651,7 @@ class SearchTest extends TestCase
 
 ### Cache Admin Approval
 
-In our system new geocaches must be approved by an admin before they are publically viewable. To test this we first create a new geocache item. From there we then use our search feature to assert that the item is not viewable. If that is true it moves on making a new test user to view the admin page and approving all pending requests. It then reruns the same search this time asserting that the cache is now visible.
+In our system, new geocaches must be approved by an admin before they become publically viewable. To test this, we first create a new geocache item. From there, we then use our search feature to assert that the item is not viewable. If that is true, it moves on making a new test user to view the admin page and approving all pending requests. It then re-runs the same search, this time asserting that the cache is now visible.
 
 ```php
 <?php
