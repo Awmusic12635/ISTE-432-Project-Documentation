@@ -379,7 +379,7 @@ sub vcl_miss {
         error 404 "Not cached";
     }
 }
-``
+```
 
 We took the opportunity to minify our JavaScript files to reduce the amount of time the system needed to parse them. To improve the loading of some of the larger assets that regularly need to be downloaded by our users, we place them on a global CDN, which is often closer to the user than our web server is and can be served from around the world via anycast. The same was done with the DNS of the website so that the lookup time for DNS resolution was consistently fast. The main web server itself was placed in New York City so as to be closer to our user base than that of those hosted elsewhere in the country.
 
