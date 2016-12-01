@@ -71,7 +71,6 @@ The website will include a simple login system, and each user can gain “Accomp
     
 ## Data Sources:
     * Google Maps API
-    * Open Geo Cache API
 
 
 # 7. Timeline
