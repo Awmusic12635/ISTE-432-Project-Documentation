@@ -36,14 +36,13 @@ The website will include a simple login system, and each user can gain “Accomp
 9. Glossary of Terms
 10. Getting Started Guide
 11. How to use GeoChap
-12. Integration of 3rd party geocaching data
-13. Accomplishment System
-14. Tracks top users stats
-15. Accomplishment badges on profiles
-16. Profiles
-17. User profiles with information about them
-18. Stats
-19. Search bar to search for geo caches. 
+12. Accomplishment System
+13. Tracks top users stats
+14. Accomplishment badges on profiles
+15. Profiles
+16. User profiles with information about them
+17. Stats
+18. Search bar to search for geo caches. 
 
     
                     
