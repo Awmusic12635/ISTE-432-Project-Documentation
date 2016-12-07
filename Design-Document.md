@@ -811,8 +811,10 @@ The APP_KEY should now be set.
 
 Now you need to run two commands to populate and create the tables in the database:
 
-```php artisan migrate
-php artisan db:seed```
+```
+php artisan migrate
+php artisan db:seed
+```
 
 ### Modify Web Server Configuration
 Each web server handles its configuration slightly differently. This is an example of one you can use if you choose Apache2.
